@@ -172,3 +172,8 @@ variable "components" {
   # sets it to null.
   nullable = false
 }
+variable "certificates_validity_period" {
+  type = number
+  default = 8760
+  description = "Validity in hours for kubernetes certificates"
+}
