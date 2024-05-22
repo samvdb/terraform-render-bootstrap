@@ -21,7 +21,7 @@ spec:
     - kube-apiserver
     - --advertise-address=$(POD_IP)
     - --allow-privileged=true
-    - --anonymous-auth=true
+    - --anonymous-auth=false
     - --authorization-mode=Node,RBAC
     - --client-ca-file=/etc/kubernetes/pki/ca.crt
     - --enable-admission-plugins=NodeRestriction
