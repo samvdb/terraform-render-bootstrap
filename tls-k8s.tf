@@ -121,7 +121,6 @@ resource "tls_cert_request" "scheduler" {
 
   subject {
     common_name = "system:kube-scheduler"
-    street_address = null
   }
 }
 
