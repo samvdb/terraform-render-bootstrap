@@ -98,8 +98,19 @@ variable "daemonset_tolerations" {
 
 variable "external_apiserver_port" {
   type        = number
-  description = "External kube-apiserver port (e.g. 6443 to match internal kube-apiserver port)"
+  description = "External kube-apiserver port (e.g. 443 to match external kube-apiserver port)"
+  default     = 443
+}
+
+variable "internal_apiserver_port" {
+  type        = number
+  description = "Internal kube-apiserver port (e.g. 6443 to match internal kube-apiserver port)"
   default     = 6443
+}
+variable "external_apiserver_domain" {
+  type        = string
+  description = "External kube-apiserver domain ( this is the haproxy frontend )"
+  default     = "cluster.domain"
 }
 
 variable "cluster_domain_suffix" {

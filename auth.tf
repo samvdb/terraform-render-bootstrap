@@ -15,7 +15,7 @@ locals {
       ca_cert      = base64encode(tls_self_signed_cert.kube-ca.cert_pem)
       kubelet_cert = base64encode(tls_locally_signed_cert.admin.cert_pem)
       kubelet_key  = base64encode(tls_private_key.admin.private_key_pem)
-      server       = format("https://%s:%s", var.api_servers[0], var.external_apiserver_port)
+      server       = format("https://%s:%s", var.external_apiserver_domain, var.external_apiserver_port)
     }
   )
 
@@ -26,7 +26,7 @@ locals {
       ca_cert      = base64encode(tls_self_signed_cert.kube-ca.cert_pem)
       kubelet_cert = base64encode(tls_locally_signed_cert.controller-manager.cert_pem)
       kubelet_key  = base64encode(tls_private_key.controller-manager.private_key_pem)
-      server       = format("https://%s:%s", var.api_servers[0], var.external_apiserver_port)
+      server       = format("https://%s:%s", var.external_apiserver_domain, var.external_apiserver_port)
     }
   )
 
@@ -37,7 +37,7 @@ locals {
       ca_cert      = base64encode(tls_self_signed_cert.kube-ca.cert_pem)
       kubelet_cert = base64encode(tls_locally_signed_cert.scheduler.cert_pem)
       kubelet_key  = base64encode(tls_private_key.scheduler.private_key_pem)
-      server       = format("https://%s:%s", var.api_servers[0], var.external_apiserver_port)
+      server       = format("https://%s:%s", var.external_apiserver_domain, var.external_apiserver_port)
     }
   )
 
@@ -45,7 +45,7 @@ locals {
   kubeconfig-bootstrap = templatefile("${path.module}/resources/kubeconfig-bootstrap",
     {
       ca_cert      = base64encode(tls_self_signed_cert.kube-ca.cert_pem)
-      server       = format("https://%s:%s", var.api_servers[0], var.external_apiserver_port)
+      server       = format("https://%s:%s", var.api_servers[0], var.internal_apiserver_port)
       token_id     = random_password.bootstrap-token-id.result
       token_secret = random_password.bootstrap-token-secret.result
     }
