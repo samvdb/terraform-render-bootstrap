@@ -1,23 +1,23 @@
 apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRole
+kind: Role
 metadata:
+  namespace: kube-system
   name: anonymous-access-livez
 rules:
   - apiGroups: [""]
-    resources: ["nodes"]
+    resources: ["livez"]
     verbs: ["get"]
-    resourceNames: ["livez"]
-
 ---
 apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
+kind: RoleBinding
 metadata:
+  namespace: kube-system
   name: anonymous-access-livez-binding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: anonymous-access-livez
 subjects:
   - kind: User
     name: system:anonymous
     apiGroup: rbac.authorization.k8s.io
-roleRef:
-  kind: ClusterRole
-  name: anonymous-access-livez
-  apiGroup: rbac.authorization.k8s.io

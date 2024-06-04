@@ -14,6 +14,7 @@ locals {
         pod_cidr          = var.pod_cidr
         service_cidr      = var.service_cidr
         aggregation_flags = var.enable_aggregation ? indent(4, local.aggregation_flags) : ""
+        kubernetes_vip = var.external_apiserver_ip
       }
     )
   }
@@ -25,8 +26,8 @@ locals {
     "manifests/${name}" => templatefile(
       "${path.module}/resources/manifests/${name}",
       {
-        server         = format("https://%s:%s", var.api_servers[0], var.external_apiserver_port)
-        apiserver_host = var.api_servers[0]
+        server         = format("https://%s:%s", var.external_apiserver_domain, var.external_apiserver_port)
+        apiserver_host = var.external_apiserver_domain
         apiserver_port = var.external_apiserver_port
         token_id       = random_password.bootstrap-token-id.result
         token_secret   = random_password.bootstrap-token-secret.result

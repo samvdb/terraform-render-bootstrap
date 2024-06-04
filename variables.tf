@@ -112,6 +112,11 @@ variable "external_apiserver_domain" {
   description = "External kube-apiserver domain ( this is the haproxy frontend )"
   default     = "cluster.domain"
 }
+variable "external_apiserver_ip" {
+  type        = string
+  description = "External kube-apiserver ip ( this is the haproxy frontend )"
+  default     = "127.0.0.1"
+}
 
 variable "cluster_domain_suffix" {
   type        = string

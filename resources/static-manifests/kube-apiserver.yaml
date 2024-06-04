@@ -20,6 +20,7 @@ spec:
     command:
     - kube-apiserver
     - --advertise-address=$(POD_IP)
+#    - --advertise-address=${kubernetes_vip}
     - --allow-privileged=true
     - --anonymous-auth=true
     - --authorization-mode=Node,RBAC
